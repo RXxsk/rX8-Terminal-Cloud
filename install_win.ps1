@@ -1,5 +1,4 @@
-# RX8 Cloud - Windows Auto-Installer & Command Creator
-
+# RX8 Cloud - Windows Auto-Installer
 
 $ErrorActionPreference = "Stop"
 
@@ -8,6 +7,11 @@ Write-Host "================================================" -ForegroundColor C
 Write-Host "[+] Instalando RX8 Cloud en Windows..." -ForegroundColor Green
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
+
+
+try {
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force -ErrorAction SilentlyContinue
+} catch {}
 
 
 if (-not (Get-Command syncthing -ErrorAction SilentlyContinue)) {
@@ -150,6 +154,9 @@ if ($userPath -notlike "*$userScriptsPath*") {
 $cmdLauncherPath = Join-Path $userScriptsPath "nube.cmd"
 $cmdLauncherContent = "@echo off`r`npowershell -ExecutionPolicy Bypass -NoProfile -File `"%USERPROFILE%\RX8Cloud\nube.ps1`""
 Set-Content -Path $cmdLauncherPath -Value $cmdLauncherContent
+
+$batLauncherPath = Join-Path $userScriptsPath "nube.bat"
+Set-Content -Path $batLauncherPath -Value $cmdLauncherContent
 
 Write-Host ""
 Write-Host "[✓] ¡INSTALACIÓN COMPLETADA EXITOSAMENTE EN WINDOWS!" -ForegroundColor Green
