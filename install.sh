@@ -16,7 +16,7 @@ fi
 
 if [ ! -f "$HOME/.config/syncthing/cert.pem" ] && [ ! -f "$HOME/.local/state/syncthing/cert.pem" ]; then
     echo -e "\e[33m[!] Generando claves de seguridad iniciales RX8...\e[0m"
-    syncthing > /dev/null 2>&1 &
+    syncthing --no-browser > /dev/null 2>&1 &
     SYN_PID=$!
     sleep 3
     kill $SYN_PID > /dev/null 2>&1
@@ -74,7 +74,7 @@ start_sync() {
         echo -e "\e[32m[✓] Servicio iniciado con éxito.\e[0m"
     fi
     echo ""
-    echo -e "\e[36m[i] Abre esta dirección en tu navegador:\e[0m"
+    echo -e "\e[36m[i] Abre esta dirección en tu navegador si deseas gestionar archivos:\e[0m"
     echo -e "\e[33m    http://127.0.0.1:8384\e[0m"
     echo ""
     read -p "Presiona ENTER para volver al menú..."
