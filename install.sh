@@ -18,7 +18,7 @@ if [ ! -f "$HOME/.config/syncthing/cert.pem" ] && [ ! -f "$HOME/.local/state/syn
     echo -e "\e[33m[!] Generando claves de seguridad iniciales RX8...\e[0m"
     syncthing --no-browser > /dev/null 2>&1 &
     SYN_PID=$!
-    sleep 3
+    sleep 4
     kill $SYN_PID > /dev/null 2>&1
 fi
 
@@ -44,7 +44,16 @@ get_my_id() {
     show_logo
     echo -e "\e[32m[+] Tu Token / ID de Dispositivo RX8:\e[0m"
     echo ""
-    syncthing --device-id
+    
+    # Intentar obtener el ID sin arrojar errores de consola
+    DEVICE_ID=$(syncthing device-id 2>/dev/null || syncthing --device-id 2>/dev/null)
+    
+    if [ -n "$DEVICE_ID" ]; then
+        echo -e "\e[1;33m$DEVICE_ID\e[0m"
+    else
+        echo -e "\e[33m[!] Generando configuración inicial... por favor ejecuta primero la Opción 4 para iniciar el servicio.\e[0m"
+    fi
+    
     echo ""
     read -p "Presiona ENTER para volver al menú..."
 }
