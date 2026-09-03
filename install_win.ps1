@@ -1,12 +1,12 @@
-# RX8 Cloud - Windows Auto-Installer
+# RX8 Cloud - Windows Auto-Installer & Command Creator
+
 
 $ErrorActionPreference = "Stop"
 
 Clear-Host
-Host.UI.RawUI.ForegroundColor = "Cyan"
-Write-Host "================================================"
+Write-Host "================================================" -ForegroundColor Cyan
 Write-Host "[+] Instalando RX8 Cloud en Windows..." -ForegroundColor Green
-Write-Host "================================================"
+Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 
 
