@@ -1,17 +1,21 @@
-cat << 'EOF' > install.sh
 #!/bin/bash
 
+
 clear
-echo -e "\e[36m[+] Instalando RX8 Cloud en el dispositivo...\e[0m"
+echo -e "\e[36m================================================\e[0m"
+echo -e "\e[32m[+] Instalando RX8 Cloud en el dispositivo...\e[0m"
+echo -e "\e[36m================================================\e[0m"
+echo ""
 
 
 if ! command -v syncthing &> /dev/null; then
-    echo -e "\e[33m[!] Instalando Syncthing...\e[0m"
+    echo -e "\e[33m[!] Instalando Syncthing y dependencias...\e[0m"
     pkg update -y && pkg install syncthing -y
 fi
 
+
 if [ ! -f "$HOME/.config/syncthing/cert.pem" ] && [ ! -f "$HOME/.local/state/syncthing/cert.pem" ]; then
-    echo -e "\e[33m[!] Generando claves de seguridad iniciales...\e[0m"
+    echo -e "\e[33m[!] Generando claves de seguridad iniciales RX8...\e[0m"
     syncthing > /dev/null 2>&1 &
     SYN_PID=$!
     sleep 3
@@ -107,7 +111,13 @@ done
 SCRIPT_EOF
 
 
+chmod +x $PREFIX/bin/nube
 chmod 755 $PREFIX/bin/nube
+hash -r 2>/dev/null
 
-echo -e "\e[32m[✓] ¡Instalación completa! Ahora solo escribe 'nube' para iniciar.\e[0m"
-EOF
+echo ""
+echo -e "\e[32m[✓] ¡INSTALACIÓN COMPLETADA EXITOSAMENTE!\e[0m"
+echo -e "\e[36m================================================\e[0m"
+echo -e "\e[33m Escribe el comando: \e[1;37mnube\e[0m\e[33m para iniciar el menú.\e[0m"
+echo -e "\e[36m================================================\e[0m"
+echo ""
